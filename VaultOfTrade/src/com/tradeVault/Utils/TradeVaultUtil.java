@@ -91,7 +91,6 @@ public class TradeVaultUtil {
 
 	public static List<Order> convertReqToOrder(HttpServletRequest request, HttpSession httpSession) {
 		String[] chosenProducts = request.getParameterValues("chosen_product");
-		String logistics = request.getParameter("chosen_logistics");
 		List<Order> orders = new ArrayList<Order>();
 		for(String product : chosenProducts) {
 			Order order = new Order();
@@ -100,7 +99,6 @@ public class TradeVaultUtil {
 			order.setProductName(product.split("#")[0]);
 			System.out.println(product.split("#")[0]);
 			order.setClientName(httpSession.getAttribute("user").toString());
-			order.setLogistics(logistics);
 			order.setProgressState("PLACED");
 			order.setUpdateSeen("C");
 			orders.add(order);

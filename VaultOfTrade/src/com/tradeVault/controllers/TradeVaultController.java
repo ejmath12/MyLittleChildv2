@@ -43,6 +43,9 @@ public class TradeVaultController {
 
 	@RequestMapping(value="/signIn")  
 	public ModelAndView signIn(HttpServletRequest request,HttpServletResponse response) {
+		if(request == null || request.getParameter("name") == null) {
+			return tradeHome();
+		}
 		String companyName = request.getParameter("name");
 		if(usersOnline.contains(companyName)) {
 			return new ModelAndView("tradeVault","generated","<script>window.onload = function() {alert('Another session active for same user. Please try later');}</script>");
@@ -71,11 +74,11 @@ public class TradeVaultController {
 	@RequestMapping(value="/newProduct") 
 	public ModelAndView newProduct(HttpServletRequest request,HttpServletResponse response) {
 		if(httpSession.getAttribute("user") == null) {
-			tradeHome();
+			return tradeHome();
 		}
 		String companyType = httpSession.getAttribute("companyType").toString();
 		if(!companyType.equals("MANUFACTURER")) {
-		    logout();
+			logout();
 		}
 		BeanResult busR = businessBean.processNewProduct(request,httpSession);
 		Map<String, String> model = new HashMap<String, String>();
@@ -88,11 +91,11 @@ public class TradeVaultController {
 	@RequestMapping(value="/buyNow") 
 	public ModelAndView saveOrder(HttpServletRequest request,HttpServletResponse response) {
 		if(httpSession.getAttribute("user") == null) {
-			tradeHome();
+			return tradeHome();
 		}
 		String companyType = httpSession.getAttribute("companyType").toString();
 		if(!companyType.equals("CLIENT")) {
-		    logout();
+			logout();
 		}
 		BeanResult busR= businessBean.saveOrder(request,httpSession);
 		Map<String, String> model = new HashMap<String, String>();
@@ -106,7 +109,7 @@ public class TradeVaultController {
 	@RequestMapping(value="/orderView")
 	public ModelAndView viewOrders() {
 		if(httpSession.getAttribute("user") == null) {
-			tradeHome();
+			return tradeHome();
 		}
 		Map<String, Object> model = new HashMap<String, Object>();
 		List<Order> orders= businessBean.viewOrders(httpSession);
@@ -120,10 +123,15 @@ public class TradeVaultController {
 			List<Order> updateOrders = new ArrayList<Order>();
 			List<Order> normalOrders = new ArrayList<Order>();
 			List<Order> attnOrders = TradeVaultUtil.extractOrders(orders,updateOrders, normalOrders, companyType);
-			model.put("type",companyType);
 			if(attnOrders.size()>0) {
 				model.put("orders", attnOrders);
-				model.put("edit", "<a href=\"\" onclick=\"editStuff();return false;\"><h4>Update Status</h4></a>");
+				if(companyType.equals("MANUFACTURER")) {
+					model.put("logAlert","Select Logistics Provider:");
+					model.put("logistics", businessBean.retrieveLogistics());
+					model.put("edit", "<a href=\"\" onclick=\"editStuff();return false;\"><h4>Update Status</h4></a>");
+				} else
+					model.put("edit", "<a href=\"\" onclick=\"editStuffLog();return false;\"><h4>Update Status</h4></a>");
+
 			}
 			if(updateOrders.size()>0) {
 				model.put("upOrders", updateOrders);
@@ -139,7 +147,7 @@ public class TradeVaultController {
 	@RequestMapping(value="/editOrder") 
 	public ModelAndView editOrder(HttpServletRequest request) {
 		if(httpSession.getAttribute("user") == null) {
-			tradeHome();
+			return tradeHome();
 		}
 		BeanResult busR = businessBean.editOrderBL(request);
 		Map<String, String> model = new HashMap<String, String>();
@@ -159,11 +167,11 @@ public class TradeVaultController {
 	@RequestMapping(value="/viewProduct")
 	public ModelAndView viewProducts() {
 		if(httpSession.getAttribute("user") == null) {
-			tradeHome();
+			return tradeHome();
 		}
 		String companyType = httpSession.getAttribute("companyType").toString();
 		if(!companyType.equals("CLIENT")) {
-		    logout();
+			logout();
 		}
 		Map<String, Object> model = new HashMap<String, Object>();
 		List<Product> prodList = businessBean.viewAllProducts();
@@ -173,11 +181,9 @@ public class TradeVaultController {
 		if(prodList.size()==0) {
 			model.put("generated", "Manufacturers are lazy! No products available");
 		} else {
-			model.put("logAlert","Select Logistics Provider:");
 			model.put("generated", "Available Products");
 			model.put("products", prodList);
 			model.put("buy", "Buy Now");
-			model.put("logistics", businessBean.retrieveLogistics());
 		}
 		return new ModelAndView("prodView","model",model);  		
 	}

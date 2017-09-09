@@ -305,30 +305,38 @@ public class DaoObjImpl implements DaoObj {
 	}
 
 	@Override
-	public BeanResult editOrder(String[] chosenProducts) {
+	public BeanResult editOrder(String[] chosenProducts,String logistics) {
 		Connection con = null;
 		List<Integer> orderId = new ArrayList<Integer>();
 		PreparedStatement ps = null;
-		String query = "update orders set Progress_State =?,Update_Seen =? where Order_Id=?";
+		StringBuilder query = new StringBuilder("update orders set Progress_State =?,Update_Seen =?");
 		try {
 			con = dataSource.getConnection();
-			ps = con.prepareStatement(query);
 			for(String s: chosenProducts) {
 				System.out.println(s.split("#")[1]);
 				switch(s.split("#")[1]) {
-				case "PLACED": ps.setString(1, "DISPATCHED");
+				case "PLACED": query.append(",logistics = ? where Order_Id = ?");
+				ps = con.prepareStatement(query.toString());
+				ps.setString(1, "DISPATCHED");
 				ps.setString(2, "M");
+				ps.setString(3, logistics);
+				ps.setInt(4, Integer.valueOf(s.split("#")[0]));
 				orderId.add(Integer.valueOf(s.split("#")[0]));
 				System.out.println(Integer.valueOf(s.split("#")[0]));
 				break;
-				case "DISPATCHED": ps.setString(1, "TRANSIT");
+				case "DISPATCHED":query.append(" where Order_Id = ?");
+				ps = con.prepareStatement(query.toString());
+				ps.setString(1, "TRANSIT");
 				ps.setString(2, "L");
-				break;
-				case "TRANSIT": ps.setString(1, "DELIVERED");
-				ps.setString(2, "L");
-				break;		
-				}
 				ps.setInt(3, Integer.valueOf(s.split("#")[0]));
+				break;
+				case "TRANSIT": query.append(" where Order_Id = ?");
+				ps = con.prepareStatement(query.toString());
+				ps.setString(1, "DELIVERED");
+				ps.setString(2, "L");
+				ps.setInt(3, Integer.valueOf(s.split("#")[0]));
+				break;		
+				}				
 				ps.addBatch();
 			}
 			int out[] = ps.executeBatch();

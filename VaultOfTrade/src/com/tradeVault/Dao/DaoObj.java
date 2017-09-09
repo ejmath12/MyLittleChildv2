@@ -21,5 +21,5 @@ public interface DaoObj {
 	public List<String> retrieveLogistics();
 	public BeanResult saveOrder(List<Order> order);
 	public List<Order> viewOrders(String companyName, String companyType);
-	public BeanResult editOrder(String[] chosenProducts);	
+	public BeanResult editOrder(String[] chosenProducts, String logistics);	
 }

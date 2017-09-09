@@ -36,7 +36,6 @@ ${model.popUp}
 </div>
 <div class = "productTabs" id="productTabs"> 
 <a href ="" onclick="newProductFormShow();return false;"><h2>Add Product</h2></a>
-<a href ="" onclick="div_show();return false;"><h2>Edit Existing Product</h2></a>
 <a href ="" onclick="order_show();return false;"><h2>View Orders</h2></a>
 </div>
 <div class= "alertText" id ="alertText">

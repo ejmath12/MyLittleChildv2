@@ -60,6 +60,11 @@
 					</c:forEach>
 				</table>
 				<br>
+							<p>${model.logAlert}</p>
+				<c:forEach items="${model.logistics}" var="logistic">
+			<input type="radio"  name="chosen_logistics" value="${logistic}"/><h3>${logistic}</h3> 
+			</c:forEach>	        
+			
 			</form>
 			
 			<br> <br> ${model.edit}

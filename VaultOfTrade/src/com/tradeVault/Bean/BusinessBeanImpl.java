@@ -91,7 +91,8 @@ public class BusinessBeanImpl implements BusinessBeanInt {
 	@Override
 	public BeanResult editOrderBL(HttpServletRequest request) {
 		String[] chosenProducts = request.getParameterValues("chosen_order");
-		BeanResult br=daoObj.editOrder(chosenProducts);
+		String logistics = request.getParameter("chosen_logistics");
+		BeanResult br=daoObj.editOrder(chosenProducts,logistics);
 		return br;
 
 	}

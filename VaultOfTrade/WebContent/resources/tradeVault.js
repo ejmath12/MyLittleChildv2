@@ -17,7 +17,7 @@ function submitNewProduct() {
 			return false;
 	 }
 	var avail = document.getElementById('Availability').value;
-	if(isNan(avail) || Number(avail)==0) {
+	if(isNan(avail)) {
 		alert("Stock cannot be empty");
 		return false;
 	}
@@ -86,6 +86,39 @@ function buyStuff() {
     	alert("Your cart is empty");
     	return false;
     }
+  	 document.getElementById('buynow').submit();
+}
+function editStuffLog() {
+	var checkBox = document.getElementsByName("chosen_order");
+    var flag =false;
+    for (var i = 0; i < checkBox.length; i++) {
+        if(checkBox[i].checked) {
+        	flag=true;
+        	break;
+        }
+    }
+    if(!flag) {
+    	alert("Please choose an order first");
+    	return false;
+    }
+    
+	 document.getElementById('editOrder').submit();
+}
+
+
+function editStuff() {
+	var checkBox = document.getElementsByName("chosen_order");
+    var flag =false;
+    for (var i = 0; i < checkBox.length; i++) {
+        if(checkBox[i].checked) {
+        	flag=true;
+        	break;
+        }
+    }
+    if(!flag) {
+    	alert("Please choose an order first");
+    	return false;
+    }
     var radioB = document.getElementsByName("chosen_logistics");
     flag =false;
     for (var i = 0; i < radioB.length; i++) {
@@ -98,22 +131,7 @@ function buyStuff() {
     	alert("Please Select Logistics Provider");
     	return false;
     }
-		 document.getElementById('buynow').submit();
-}
-
-function editStuff() {
-	var checkBox = document.getElementsByName("chosen_order");
-    var flag =false;
-    for (var i = 0; i < checkBox.length; i++) {
-        if(checkBox[i].checked) {
-        	flag=true;
-        	break;
-        }
-    }
-    if(!flag) {
-    	alert("Please chose an order first");
-    	return false;
-    }
+	
 	 document.getElementById('editOrder').submit();
 }
 
