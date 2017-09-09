@@ -1,0 +1,5 @@
+package com.tradeVault.models;
+
+public enum StatusEnum {
+	FAILED,SUCCESS;
+}
