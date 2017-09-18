@@ -1,0 +1,250 @@
+html {
+	font-family: 'Roboto Slab', serif;
+	color: #FFFFFF;
+	line-height: 1.30;
+}
+
+* {
+	margin: 0;
+	padding: 0;
+	outline: 0;
+	vertical-align: baseline;
+}
+
+.container {
+	position: relative;
+	width: 100%;
+}
+
+.signupform input[type=submit]:hover {
+	font-weight: bold;
+	background: #404040;
+}
+
+input[type=submit]:hover {
+	font-weight: bold;
+}
+
+input[type=button]:hover {
+	font-weight: bold;
+}
+
+input[type=submit], input[type=button] {
+	height: 36px;
+	width: 150px;
+	padding: 5px 15px;
+	background: #000000;
+	border: 0 none;
+	cursor: pointer;
+	color: #FFFFFF;
+	-webkit-border-radius: 5px;
+	border-radius: 5px;
+	font-family: 'Roboto Slab', serif;
+}
+
+.signInForm input[type=text] {
+	margin-left: 100px;
+	height: 34px;
+	width: 200px;
+	font-size: 15px;
+	padding-left: 10px;
+}
+
+.signInForm input[type=password] {
+	margin-left: 20px;
+	height: 34px;
+	width: 200px;
+	font-size: 15px;
+	margin: 5px;
+	padding-left: 10px;
+}
+
+.newProductDiv {
+	text-align: center;
+}
+
+.main {
+	min-width: 460px;
+	background-color: #404040;
+	padding: 20px;
+}
+
+.logo {
+	position: relative;
+	margin-left: 100px;
+	display: inline;
+}
+
+.logo a {
+	text-decoration: none;
+}
+
+.logo h2 {
+	display: inline;
+	color: #FFFFFF;
+}
+
+.nav_tabs {
+	position: relative;
+	float: right;
+	margin-right: 30px;
+	padding: 5px;
+	padding-left: 7px;
+	padding-right: 7px;
+	border: 1px solid #fff;
+	display: inline;
+}
+
+.productTabs {
+	min-width: 460px;
+	padding: 80px;
+	margin-right: 70px;
+	float: right;
+	position: relative;
+	display: inline;
+	color: #000000;
+}
+
+.productTabs h2:hover {
+	background-color: #404040;
+	color: #FFFFFF;
+}
+
+.productTabs h2 {
+	margin-top: 50px;
+	width: 250px;
+	padding: 20px;
+	color: #000000;
+	position: relative;
+	border: 1px solid black;
+	text-align: center;
+}
+
+a {
+	text-decoration: none;
+}
+
+.nav_tabs h2 {
+	color: #FFFFFF;
+	display: inline;
+	font-size: 16px;
+}
+
+input, select {
+	height: 30px;
+	width: 300px;
+	font-size: 17px;
+	margin: 5px;
+	padding-left: 10px;
+}
+
+select {
+	width: 315px;
+	height: 34px;
+	margin-bottom: 15px;
+	color: gray;
+}
+
+#signin {
+	opacity: .95;
+	position: relative;
+}
+
+.full img {
+	margin-left: 50px;
+}
+
+.showName {
+	margin: 10px auto;
+	text-align: center;
+}
+
+.showName h2 {
+	display: inline;
+	font-size: 42px;
+	color: #000000;
+}
+
+.alertText {
+	width: 600px;
+	height: 500px;
+	min-width: 400px;
+	background: url(alert.png) no-repeat;
+	text-align: center;
+}
+
+.alertText h2 {
+	color: #FFFFFF;
+	padding-top: 150px;
+	padding-right: 75px;
+}
+
+table td {
+	border: 1px solid #000;
+	width: 250px;
+	padding: 10px;
+}
+
+.showName h1 {
+	display: inline;
+	font-size: 42px;
+	color: #404040;
+}
+
+input[type=radio] {
+	height:15px;
+	width:20px;
+}
+.products {
+	padding-top: 50px;
+	text-align: center;
+	margin: 0 auto;
+	color: #000000;
+	text-align: center;
+}
+
+.products h4:hover {
+	background-color: #404040;
+}
+
+p {
+	font-size:22px;
+}
+
+.products h4 {
+	display:inline;
+	margin: 0 auto;
+	width: 120px;
+	height: 20px;
+	padding: 10px;
+	color: #FFFFFF;
+	position: relative;
+	border: 1px solid black;
+	text-align: center;
+	background-color: #000000;
+	padding: 10px;
+}
+h3{
+	display:inline;
+}
+.products h2 {
+	font-size: 42px;
+}
+
+.signupform {
+	min-width: 460px;
+	text-align: center;
+	padding-top: 180px;
+	padding-bottom: 130px;
+	background: url(backg.jpg) no-repeat center center fixed;
+	position: relative;
+	display: block;
+}
+
+.left {
+	float: left;
+}
+
+.right {
+	float: right;
+}

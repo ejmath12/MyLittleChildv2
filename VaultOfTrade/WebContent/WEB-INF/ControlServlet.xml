@@ -1,0 +1,38 @@
+<beans xmlns = "http://www.springframework.org/schema/beans"
+   xmlns:context = "http://www.springframework.org/schema/context"
+   xmlns:xsi = "http://www.w3.org/2001/XMLSchema-instance"
+   xsi:schemaLocation = "http://www.springframework.org/schema/beans     
+   
+   http://www.springframework.org/schema/beans/spring-beans.xsd
+   http://www.springframework.org/schema/context 
+   http://www.springframework.org/schema/context/spring-context.xsd
+   http://www.springframework.org/schema/mvc
+http://www.springframework.org/schema/mvc/spring-mvc.xsd"
+   xmlns:mvc="http://www.springframework.org/schema/mvc">
+   <context:property-placeholder
+        location="/resources/appProp.properties"/>
+   <context:component-scan base-package = "main.java.com.tradeVault" />
+       <mvc:annotation-driven />
+   
+    <alias name="${bus.impl}" alias="businessLogTyp"/>
+    <alias name="${db.impl}" alias="dataBaseTyp"/>
+
+    <mvc:resources mapping="/resources/**" location="/resources/" cache-period="31556926"/>
+<!-- move to properties -->
+    <bean id="mySqlDS" class="org.springframework.jdbc.datasource.DriverManagerDataSource">
+		<property name="driverClassName" value="com.mysql.jdbc.Driver" />
+		<property name="url" value="${mySQLurl}" />
+		<property name="username" value="${mySQLuser}" />
+		<property name="password" value="${mySQLpassword}" />
+	</bean>
+    
+    <bean id="viewResolver"
+    class=" org.springframework.web.servlet.view.InternalResourceViewResolver" >
+        <property name="prefix">
+            <value>WEB-INF/views/</value>
+        </property>
+        <property name="suffix">
+            <value>.jsp</value>
+        </property>	
+       </bean>
+</beans>
